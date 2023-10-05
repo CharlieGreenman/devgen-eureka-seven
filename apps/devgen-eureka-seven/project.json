@@ -1,0 +1,95 @@
+{
+  "name": "devgen-eureka-seven",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/devgen-eureka-seven/src",
+  "prefix": "devgen-eureka-seven",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/devgen-eureka-seven",
+        "index": "apps/devgen-eureka-seven/src/index.html",
+        "main": "apps/devgen-eureka-seven/src/main.ts",
+        "polyfills": "apps/devgen-eureka-seven/src/polyfills.ts",
+        "tsConfig": "apps/devgen-eureka-seven/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/devgen-eureka-seven/src/favicon.ico",
+          "apps/devgen-eureka-seven/src/assets"
+        ],
+        "styles": ["apps/devgen-eureka-seven/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/devgen-eureka-seven/src/environments/environment.ts",
+              "with": "apps/devgen-eureka-seven/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "devgen-eureka-seven:build:production"
+        },
+        "development": {
+          "browserTarget": "devgen-eureka-seven:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "devgen-eureka-seven:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/devgen-eureka-seven/src/**/*.ts",
+          "apps/devgen-eureka-seven/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/devgen-eureka-seven"],
+      "options": {
+        "jestConfig": "apps/devgen-eureka-seven/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
